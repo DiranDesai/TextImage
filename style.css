@@ -68,8 +68,9 @@ body{
 
 @media(max-width: 700px){
     .upload-wrapper{
-        max-width: 400px;
+        max-width: 430px;
         margin: auto;
+border: none;
     }
 }
 
