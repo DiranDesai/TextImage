@@ -3,7 +3,7 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 20px;
+    padding: 50px !important;
 }
 
 .upload-wrapper{
@@ -11,6 +11,7 @@ body{
     padding: 4rem;
     border-radius: 15px;
     text-align: center;
+    margin: 20px;
 }
 
 .header-wrapper{
@@ -41,8 +42,8 @@ body{
 .img-display{
     margin: 20px auto;
     border-radius: 10px;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 #data{
@@ -67,7 +68,8 @@ body{
 
 @media(max-width: 700px){
     .upload-wrapper{
-        max-width: 500px;
+        max-width: 400px;
+        margin: auto;
     }
 }
 
