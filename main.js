@@ -79,8 +79,10 @@ fileInput.addEventListener("change", (e) => {
             'eng', // Language
             {
                 logger: info => console.log(info) // Log progress
+spinner.classList.remove("d-none")
             }
         ).then(({ data: { text } }) => {
+spinner.classList.add("d-none")
            data.innerHTML = text
             createPdf(text);
         });
