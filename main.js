@@ -4,6 +4,7 @@ const data = document.querySelector("#data");
 const imgDisplay = document.querySelector(".img-display");
 const progressWrapper = document.querySelector(".progress-wrapper");
 const uploadWrapper = document.querySelector(".upload-wrapper")
+const spinner = document.querySelector(".spinner");
 
 
 let extractedText = null
