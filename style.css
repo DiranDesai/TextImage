@@ -62,3 +62,11 @@ body{
 }
 
 
+@media(max-width: 700px){
+    .upload-wrapper{
+        max-width: 500px;
+    }
+}
+
+
+
