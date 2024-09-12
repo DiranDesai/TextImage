@@ -38,8 +38,10 @@ body{
     color: white;
 }
 .img-display{
-    margin-top: 20px;
+    margin: 20px auto;
     border-radius: 10px;
+    width: 100px;
+    height: 100px;
 }
 
 #data{

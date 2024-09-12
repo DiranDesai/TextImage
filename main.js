@@ -9,6 +9,7 @@ const uploadWrapper = document.querySelector(".upload-wrapper")
 let extractedText = null
 
 progressWrapper.style.display = "none"
+imgDisplay.style.display = "none"
 
 
 
@@ -88,6 +89,7 @@ fileInput.addEventListener("change", (e) => {
         if (!imageUrl && imageSelected) {
             progressWrapper.style.display = "block"
         }
+        imgDisplay.style.display = "block"
         imgDisplay.src = imageUrl
     }, 1000)
 
