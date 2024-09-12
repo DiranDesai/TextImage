@@ -4,7 +4,7 @@ const data = document.querySelector("#data");
 const imgDisplay = document.querySelector(".img-display");
 const progressWrapper = document.querySelector(".progress-wrapper");
 const uploadWrapper = document.querySelector(".upload-wrapper")
-const spinner = document.querySelector(".spinner");
+
 
 
 let extractedText = null
@@ -79,10 +79,8 @@ fileInput.addEventListener("change", (e) => {
             'eng', // Language
             {
                 logger: info => console.log(info) // Log progress
-spinner.classList.remove("d-none")
             }
         ).then(({ data: { text } }) => {
-spinner.classList.add("d-none")
            data.innerHTML = text
             createPdf(text);
         });
