@@ -16,7 +16,7 @@ imgDisplay.style.display = "none"
 
 async function createPdf(extractedText) {
     const pdfDoc = await PDFLib.PDFDocument.create();
-    const page = pdfDoc.addPage([750, 400]);
+    const page = pdfDoc.addPage([750, 600]);
     page.moveTo(0, 300);
     page.drawText(extractedText);
     
