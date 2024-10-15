@@ -6,6 +6,7 @@ const progressWrapper = document.querySelector(".progress-wrapper");
 const uploadWrapper = document.querySelector(".upload-wrapper")
 const spinner = document.querySelector(".spinner-border")
 const scanButton = document.querySelector(".scan-btn")
+const captureBtn = document.querySelector(".capture-btn")
 const video = document.getElementById('video');
 
 
@@ -57,6 +58,14 @@ function downloadPDF(e){
 let imageUrl = null;
 let imageSelected = null
 
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+
+video.addEventListener('loadedmetadata', () => {
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+});
+
 const browseBtn = document.querySelector("#browse")
 
 
@@ -78,6 +87,12 @@ scanButton.addEventListener("click", () => {
     });
 })
 
+captureBtn.addEventListener("click", () => {
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    loadTesseract(imageData)
+})
+
 console.log(fileInput)
 fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0]
@@ -87,21 +102,7 @@ fileInput.addEventListener("change", (e) => {
         progressWrapper.style.display = "block"
         imageUrl = URL.createObjectURL(file);
         imageSelected = true
-        Tesseract.recognize(
-            file,
-            'eng', // Language
-            {
-                logger: info => {
-                    if (info.progress == 0) {
-                        spinner.style.display = "block"
-                    }
-                }
-            }
-        ).then(({ data: { text } }) => {
-           spinner.style.display = "none"
-           data.innerHTML = text
-            createPdf(text);
-        });
+        loadTesseract(file)
     }
 
     setTimeout(() => {
@@ -117,4 +118,22 @@ fileInput.addEventListener("change", (e) => {
     }, 1000)
 
 })
+
+function loadTesseract(file){
+    Tesseract.recognize(
+        file,
+        'eng', // Language
+        {
+            logger: info => {
+                if (info.progress == 0) {
+                    spinner.style.display = "block"
+                }
+            }
+        }
+    ).then(({ data: { text } }) => {
+       spinner.style.display = "none"
+       data.innerHTML = text
+        createPdf(text);
+    });
+}
 
