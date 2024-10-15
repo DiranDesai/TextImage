@@ -69,7 +69,7 @@ browseBtn.addEventListener("click", () => {
 })
 
 scanButton.addEventListener("click", () => {
-    navigator.mediaDevices.getUserMedia({ video: true })
+    navigator.mediaDevices.getUserMedia({ video: {facingMode: { exact: "environment" } // Request the back camera} })
     .then(stream => {
         video.srcObject = stream;
     })
