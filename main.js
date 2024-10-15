@@ -4,6 +4,12 @@ const data = document.querySelector("#data");
 const imgDisplay = document.querySelector(".img-display");
 const progressWrapper = document.querySelector(".progress-wrapper");
 const uploadWrapper = document.querySelector(".upload-wrapper")
+const spinner = document.querySelector(".spinner-border")
+const scanButton = document.querySelector(".scan-btn")
+const video = document.getElementById('video');
+
+
+spinner.style.display = "none"
 
 
 
@@ -20,9 +26,6 @@ async function createPdf(extractedText) {
     page.moveTo(0, 300);
     page.drawText(extractedText);
     
-    
-    //const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true });
-
 
     // Save the PDF as Uint8Array
     const pdfBytes = await pdfDoc.save();
@@ -65,6 +68,16 @@ browseBtn.addEventListener("click", () => {
     fileInput.click();
 })
 
+scanButton.addEventListener("click", () => {
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        video.srcObject = stream;
+    })
+    .catch(err => {
+        console.error("Error accessing webcam: ", err);
+    });
+})
+
 console.log(fileInput)
 fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0]
@@ -78,9 +91,14 @@ fileInput.addEventListener("change", (e) => {
             file,
             'eng', // Language
             {
-                logger: info => console.log(info) // Log progress
+                logger: info => {
+                    if (info.progress == 0) {
+                        spinner.style.display = "block"
+                    }
+                }
             }
         ).then(({ data: { text } }) => {
+           spinner.style.display = "none"
            data.innerHTML = text
             createPdf(text);
         });

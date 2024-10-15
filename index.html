@@ -12,6 +12,8 @@
 </head>
 <body>
     <div class="upload-wrapper">
+        <button class="scan-btn">Scan Image</button>
+        <video id="video" autoplay></video>
         <div class="header-wrapper">
             <h1 class="display-4 heading">Extracting Text from Images</h1>
             <p>Add your images with a max upload of 10MB</p>
@@ -31,6 +33,10 @@
         </div>
 
         <img src="" class="img-display" alt="">
+
+        <div class="spinner-border mt-4" role="status">
+            <span class="sr-only"></span>
+          </div>
 
         <div id="data"></div>
         

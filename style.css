@@ -6,6 +6,10 @@ body{
     padding: 50px !important;
 }
 
+.spinner-border{
+    margin: auto;
+}
+
 .upload-wrapper{
     border: 4px dashed teal;
     padding: 4rem;
@@ -39,13 +43,19 @@ body{
     font-weight: 700;
     color: white;
 }
+.upload-input button:focus{
+    outline: none;
+}
 .img-display{
     margin: 20px auto;
     border-radius: 10px;
     width: 200px;
     height: 200px;
-object-fit: cover;
+    object-fit: contain;
+    border: 1px solid #333;
+    padding: 20px;
 }
+
 
 #data{
     margin: 3rem auto;
