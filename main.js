@@ -54,7 +54,6 @@ function downloadPDF(e){
 
 
 
-
 let imageUrl = null;
 let imageSelected = null
 
@@ -87,9 +86,27 @@ scanButton.addEventListener("click", () => {
     });
 })
 
+function handleImageUrl(imageData){
+    // Create a new canvas to draw the image data
+    const tempCanvas = document.createElement('canvas');
+    tempCanvas.width = canvas.width;
+    tempCanvas.height = canvas.height;
+    const tempContext = tempCanvas.getContext('2d');
+
+    // Put the image data onto the new canvas
+    tempContext.putImageData(imageData, 0, 0);
+
+    // Convert the new canvas to a Data URL
+    const imgDataUrl = tempCanvas.toDataURL('image/png');
+    return imgDataUrl
+}
+
 captureBtn.addEventListener("click", () => {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    const imgDataUrl = handleImageUrl(imageData)
+
+    console.log(imgDataUrl)
     loadTesseract(imageData)
 })
 
